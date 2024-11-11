@@ -17,6 +17,55 @@
             height: 20px;
             margin-right: 5px;
         }
+        /* Animasi mobil */
+        .car-animation {
+            position: absolute;
+            width: 100px; /* Ukuran gambar mobil */
+            height: 50px; /* Ukuran gambar mobil */
+            margin-top: -20px; /* Untuk menempatkan mobil di tengah progress bar */
+            transition: left 0.5s; /* Animasi saat bergerak */
+        }
+
+        .progress-container {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 30px; /* Vertikal center */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Gambar di sebelah kanan */
+        .image-container {
+            width: 150px; /* Lebar kotak gambar */
+            height: 150px; /* Tinggi kotak gambar */
+            margin-left: 1000px;
+            display: none; /* Awalnya disembunyikan */
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%; /* Menyesuaikan ukuran gambar */
+            height: 100%; /* Menyesuaikan ukuran gambar */
+            object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+        }
     </style>
 </head>
 
@@ -35,7 +84,7 @@
             <h5 class="text-primary">Sistem Pengajuan Projek Penelitian</h5>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Dashboard</a>
+                    <a class="nav-link active" href="penelitian.html">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profil Peneliti</a>
@@ -139,8 +188,27 @@
                 </div>
             </div>
 
+            <!-- Animasi Proses -->
+            <div class="container m-4">
+                <h2 class="fw-bold">Proses Pengajuan</h2>
+                <div class="car-animation" id="carAnimation">
+                    <!-- <img src="https://img.icons8.com/ios-filled/100/000000/car.png" alt="Mobil" style="width: 100%; height: auto;"> -->
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+                <button class="btn btn-primary" id="incrementButton">Tambah 5%</button>
+
+                <!-- Gambar di sebelah kanan -->
+                <div class="image-container" id="imageContainer">
+                    <img id="progressImage" src="" alt="Gambar Progres">
+                    <div id="imageText">Gambar akan muncul di sini</div>
+                </div>
+            </div>
+
             <!-- Tabel untuk Melihat Status -->
-            <!-- <div class="container m-4">
+            <div class="container m-4">
                 <h2 class="fw-bold">Tabel Status Pengajuan</h2>
                 <table class="table table-bordered">
                     <thead>
@@ -190,94 +258,9 @@
                         </tr>
                     </tbody>
                 </table>
-            </div> -->
-
-            <!-- Tabel Pilihan Proyek
-            <div class="container m-4">
-                <h2 class="fw-bold">Pilihan Proyek</h2>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID Proyek</th>
-                            <th>Nama Proyek</th>
-                            <th>Peringatan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Proyek A</td>
-                            <td>
-                                <span class="text-warning">
-                                    <i class="fas fa-exclamation-triangle status-icon" style="color: orange;"></i> Peringatan: Proyek ini perlu ditinjau.
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-success" onclick="updateProjectStatus(this, 'dilanjutkan')">
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                                <button class="btn btn-danger" onclick="updateProjectStatus(this, 'ditolak')">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Proyek B</td>
-                            <td>
-                                <span class="text-warning">
-                                    <i class="fas fa-exclamation-triangle status-icon" style="color: orange;"></i> Peringatan: Proyek ini perlu ditinjau.
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-success" onclick="updateProjectStatus(this, 'dilanjutkan')">
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                                <button class="btn btn-danger" onclick="updateProjectStatus(this, 'ditolak')">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> -->
-
-            <!-- Tabel Pengajuan dengan Tombol Tambah
-            <div class="container m-4">
-                <h2 class="fw-bold">Tabel Pengajuan</h2>
-                <button class="btn btn-primary mb-3" onclick="window.location.href='form.html'">Tambah</button>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID Pengajuan</th>
-                            <th>Nama Peneliti</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Menunggu</td>
-                            <td>
-                                <button class="btn btn-info">Detail</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>Menunggu</td>
-                            <td>
-                                <button class="btn btn-info">Detail</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
@@ -289,27 +272,61 @@
         });
 
         function saveStatus(button) {
-            const row = button.closest('tr');
-            const idPengajuan = row.cells[0].innerText;
-            alert(`Status untuk ID Pengajuan ${idPengajuan} telah disimpan.`);
-            // Di sini Anda dapat menambahkan logika untuk menyimpan status ke server jika diperlukan
+            // Implementasi fungsi untuk menyimpan status
+            alert("Status telah disimpan!");
         }
 
-        function updateProjectStatus(button, action) {
-            const row = button.closest('tr');
-            const projectId = row.cells[0].innerText;
-            let statusMessage = '';
+        function updateProjectStatus(button, status) {
+            // Implementasi fungsi untuk memperbarui status proyek
+            alert("Status proyek telah diperbarui menjadi: " + status);
+        }
 
-            if (action === 'dilanjutkan') {
-                statusMessage = `Proyek ID ${projectId} telah ditinjau dan akan dilanjutkan.`;
-                row.cells[2].innerHTML = '<span class="text-success">Telah Ditinjau</span>';
-            } else {
-                statusMessage = `Proyek ID ${projectId} telah ditolak.`;
-                row.cells[2].innerHTML = '<span class="text-danger">Ditolak</span>';
+        // Animasi Proses
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const incrementButton = document.getElementById('incrementButton');
+        const carAnimation = document.getElementById('carAnimation');
+        const imageContainer = document.getElementById('imageContainer');
+        const progressImage = document.getElementById('progressImage');
+        const imageText = document.getElementById('imageText');
+
+        // Gambar yang akan ditampilkan
+        const images = [
+            { src: 'https://via.placeholder.com/150?text=Gambar+0%', text: 'Mulai' },
+            { src: 'https://via.placeholder.com/150?text=Gambar+25%', text: '25% Progres' },
+            { src: 'https://via.placeholder.com/150?text=Gambar+50%', text: '50% Progres' },
+            { src: 'https://via.placeholder.com/150?text=Gambar+75%', text: '75% Progres' },
+            { src: 'https://via.placeholder.com/150?text=Gambar+100%', text: '100% Progres' }
+        ];
+
+        let hideImageTimeout;
+
+        incrementButton.addEventListener('click', () => {
+            if (progress < 100) {
+                progress += 5;
+                progressBar.style.width = progress + '%';
+                progressText.innerText = progress + '%';
+
+                // Menggerakkan mobil sesuai progress
+                const carPosition = (progress / 100) * (document.querySelector('.progress-container').offsetWidth - carAnimation.offsetWidth);
+                carAnimation.style.left = carPosition + 'px';
+
+                // Menampilkan gambar sesuai progress
+                if (progress % 25 === 0) {
+                    imageContainer.style.display = 'block'; // Tampilkan gambar
+                    const index = progress / 25; // Hitung index gambar
+                    progressImage.src = images[index].src; // Ganti gambar
+                    imageText.innerText = images[index].text; // Ganti teks
+
+                    // Reset timer untuk menyembunyikan gambar
+                    clearTimeout(hideImageTimeout);
+                    hideImageTimeout = setTimeout(() => {
+                        imageContainer.style.display = 'none'; // Sembunyikan gambar setelah 3 detik
+                    }, 3000);
+                }
             }
-
-            alert(statusMessage);
-        }
+        });
     </script>
 </body>
 
