@@ -66,6 +66,11 @@
             height: 100%; /* Menyesuaikan ukuran gambar */
             object-fit: cover; /* Memastikan gambar tidak terdistorsi */
         }
+
+        /* Styling untuk tombol dan input */
+        .custom-input {
+            width: 100px; /* Ukuran input kustom */
+        }
     </style>
 </head>
 
@@ -133,131 +138,92 @@
                     <a class="nav-link" href="#">Halaman SSO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#pengajuanSubmenu" aria-expanded="false">Pengajuan</a>
-                    <ul class="nav flex-column collapse" id="pengajuanSubmenu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="Tb_pegajuan.html">Pengajuan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Tb_satus_pengajuan.html">Status Pengajuan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="revisi.html">Riwayat Pengajuan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Bantuan Pengajuan</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#statusSubmenu" aria-expanded="false">Melihat Status</a>
-                    <ul class="nav flex-column collapse" id="statusSubmenu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Ditolak</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Diterima</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Notifikasi Status Khusus</a>
-                        </li>
-                    </ul>
+                    <a class="nav-link" href="#">Pengaturan</a>
                 </li>
             </ul>
         </div>
-        <div class="flex-grow-1" style="margin-left: 250px;">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb ms-4">
-                    <li class="breadcrumb-item text-primary fw-bold"><a href="#" class="text-decoration-none">Sistem Pengajuan Projek Penelitian</a></li>
-                    <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">Library</li>
-                </ol>
-            </nav>
-            <div class="accordion m-4" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-bold text-dark" style="background-color: #ffcb20;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-exclamation-triangle" style="color: white;">&ensp;</i>SISTEM PENGINGAT
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div class="accordion-body text-secondary">
-                            <label>Saat ini tidak ada pengingat yang tersedia.</label>
-                            <br><br>
-                        </div>
-                    </div>
-                </div>
+
+        <div class="container" style="margin-left: 260px; padding-top: 20px;">
+            <h2 class="fw-bold">Proses Pengajuan</h2>
+            
+            <!-- Bar Presentasi -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text" id="progressText">0%</div>
             </div>
 
-            <!-- Animasi Proses -->
-            <div class="container m-4">
-                <h2 class="fw-bold">Proses Pengajuan</h2>
-                <div class="car-animation" id="carAnimation">
-                    <!-- <img src="https://img.icons8.com/ios-filled/100/000000/car.png" alt="Mobil" style="width: 100%; height: auto;"> -->
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                    <div class="progress-text" id="progressText">0%</div>
-                </div>
-                <button class="btn btn-primary" id="incrementButton">Tambah 5%</button>
-
-                <!-- Gambar di sebelah kanan -->
-                <div class="image-container" id="imageContainer">
-                    <img id="progressImage" src="" alt="Gambar Progres">
-                    <div id="imageText">Gambar akan muncul di sini</div>
-                </div>
+            <div class="mb-3">
+                <h5>Tambah Persentase</h5>
+                <button class="btn btn-primary increment-button" data-increment="5">Tambah 5%</button>
+                <button class="btn btn-primary increment-button" data-increment="10">Tambah 10%</button>
+                <button class="btn btn-primary increment-button" data-increment="50">Tambah 50%</button>
+                <input type="number" id="customIncrement" class="form-control custom-input" placeholder="Persentase kustom">
+                <button class="btn btn-primary" id="submitCustomIncrement">Tambah</button>
             </div>
 
-            <!-- Tabel untuk Melihat Status -->
-            <div class="container m-4">
-                <h2 class="fw-bold">Tabel Status Pengajuan</h2>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID Pengajuan</th>
-                            <th>Nama Peneliti</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="statusTableBody">
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>
-                                <span class="text-success">
-                                    <img src="https://img.icons8.com/ios-filled/20/00b300/checkmark.png" class="status-icon" alt="Diterima"/> Diterima
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>
-                                <span class="text-danger">
-                                    <img src="https://img.icons8.com/ios-filled/20/ff0000/cancel.png" class="status-icon" alt="Ditolak"/> Ditolak
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Mark Johnson</td>
-                            <td>
-                                <span class="text-warning">
-                                    <i class="fas fa-exclamation-triangle status-icon" style="color: orange;"></i> perlu ditinjau 
-                                </span>
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="mb-3">
+                <h5>Kurangi Persentase</h5>
+                <button class="btn btn-danger decrement-button" data-decrement="5">Kurangi 5%</button>
+                <button class="btn btn-danger decrement-button" data-decrement="10">Kurangi 10%</button>
+                <button class="btn btn-danger decrement-button" data-decrement="50">Kurangi 50%</button>
+                <input type="number" id="customDecrement" class="form-control custom-input" placeholder="Kurangi dengan jumlah kustom">
+                <button class="btn btn-danger" id="submitCustomDecrement">Kurangi</button>
+            </div>
+
+            <h2 class="fw-bold">Tabel Status Pengajuan</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID Pengajuan</th>
+                        <th>Nama Peneliti</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="statusTableBody">
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>
+                            <span class="text-success">
+                                <img src="https://img.icons8.com/ios-filled/20/00b300/checkmark.png" class="status-icon" alt="Diterima"/> Diterima
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>
+                            <span class="text-danger">
+                                <img src="https://img.icons8.com/ios-filled/20/ff0000/cancel.png" class="status-icon" alt="Ditolak"/> Ditolak
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Mark Johnson</td>
+                        <td>
+                            <span class="text-warning">
+                                <i class="fas fa-exclamation-triangle status-icon" style="color: orange;"></i> Perlu Ditinjau 
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="saveStatus(this)">Simpan</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Gambar di sebelah kanan -->
+            <div class="image-container" id="imageContainer">
+                <img id="progressImage" src="" alt="Gambar Progres">
+                <div id="imageText">Gambar akan muncul di sini</div>
             </div>
         </div>
     </div>
@@ -272,26 +238,19 @@
         });
 
         function saveStatus(button) {
-            // Implementasi fungsi untuk menyimpan status
             alert("Status telah disimpan!");
-        }
-
-        function updateProjectStatus(button, status) {
-            // Implementasi fungsi untuk memperbarui status proyek
-            alert("Status proyek telah diperbarui menjadi: " + status);
         }
 
         // Animasi Proses
         let progress = 0;
         const progressBar = document.getElementById('progressBar');
         const progressText = document.getElementById('progressText');
-        const incrementButton = document.getElementById('incrementButton');
-        const carAnimation = document.getElementById('carAnimation');
+        const incrementButtons = document.querySelectorAll('.increment-button');
+        const decrementButtons = document.querySelectorAll('.decrement-button');
         const imageContainer = document.getElementById('imageContainer');
         const progressImage = document.getElementById('progressImage');
         const imageText = document.getElementById('imageText');
 
-        // Gambar yang akan ditampilkan
         const images = [
             { src: 'https://via.placeholder.com/150?text=Gambar+0%', text: 'Mulai' },
             { src: 'https://via.placeholder.com/150?text=Gambar+25%', text: '25% Progres' },
@@ -302,29 +261,66 @@
 
         let hideImageTimeout;
 
-        incrementButton.addEventListener('click', () => {
-            if (progress < 100) {
-                progress += 5;
-                progressBar.style.width = progress + '%';
-                progressText.innerText = progress + '%';
-
-                // Menggerakkan mobil sesuai progress
-                const carPosition = (progress / 100) * (document.querySelector('.progress-container').offsetWidth - carAnimation.offsetWidth);
-                carAnimation.style.left = carPosition + 'px';
-
-                // Menampilkan gambar sesuai progress
-                if (progress % 25 === 0) {
-                    imageContainer.style.display = 'block'; // Tampilkan gambar
-                    const index = progress / 25; // Hitung index gambar
-                    progressImage.src = images[index].src; // Ganti gambar
-                    imageText.innerText = images[index].text; // Ganti teks
-
-                    // Reset timer untuk menyembunyikan gambar
-                    clearTimeout(hideImageTimeout);
-                    hideImageTimeout = setTimeout(() => {
-                        imageContainer.style.display = 'none'; // Sembunyikan gambar setelah 3 detik
-                    }, 3000);
+        incrementButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const increment = parseInt(button.getAttribute('data-increment'));
+                if (progress < 100) {
+                    progress += increment;
+                    if (progress > 100) progress = 100; // Pastikan tidak lebih dari 100
+                    updateProgressBar();
                 }
+            });
+        });
+
+        decrementButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const decrement = parseInt(button.getAttribute('data-decrement'));
+                if (progress > 0) {
+                    progress -= decrement;
+                    if (progress < 0) progress = 0; // Pastikan tidak kurang dari 0
+                    updateProgressBar();
+                }
+            });
+        });
+
+        function updateProgressBar() {
+            progressBar.style.width = progress + '%';
+            progressText.innerText = progress + '%';
+
+            if (progress % 25 === 0) {
+                imageContainer.style.display = 'block'; // Tampilkan gambar
+                const index = progress / 25; // Hitung index gambar
+                progressImage.src = images[index].src; // Ganti gambar
+                imageText.innerText = images[index].text; // Ganti teks
+
+                clearTimeout(hideImageTimeout);
+                hideImageTimeout = setTimeout(() => {
+                    imageContainer.style.display = 'none'; // Sembunyikan gambar setelah 3 detik
+                }, 3000);
+            }
+        }
+
+        document.getElementById('submitCustomIncrement').addEventListener('click', () => {
+            const customValue = parseInt(document.getElementById('customIncrement').value);
+            if (!isNaN(customValue) && customValue > 0) {
+                progress += customValue;
+                if (progress > 100) progress = 100; // Pastikan tidak lebih dari 100
+                updateProgressBar();
+                document.getElementById('customIncrement').value = ''; // Reset input
+            } else {
+                alert("Masukkan nilai yang valid untuk persentase kustom.");
+            }
+        });
+
+        document.getElementById('submitCustomDecrement').addEventListener('click', () => {
+            const customValue = parseInt(document.getElementById('customDecrement').value);
+            if (!isNaN(customValue) && customValue > 0) {
+                progress -= customValue;
+                if (progress < 0) progress = 0; // Pastikan tidak kurang dari 0
+                updateProgressBar();
+                document.getElementById('customDecrement').value = ''; // Reset input
+            } else {
+                alert("Masukkan nilai yang valid untuk pengurangan kustom.");
             }
         });
     </script>

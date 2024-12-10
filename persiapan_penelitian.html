@@ -20,14 +20,21 @@
         .progress {
             height: 20px;
         }
+        .navbar {
+            background-color: #f8f9fa; /* Warna latar belakang navbar */
+        }
+        .navbar-brand img {
+            width: 160px;
+            height: 40px;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light mb-3 shadow-sm">
+    <nav class="navbar navbar-light mb-3 shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="C:\Users\ASUS\OneDrive\图片\Saved Pictures\sialog.png" alt="" width="160" height="40" class="d-inline-block align-text-top ms-3">
+                <img src="C:\Users\ASUS\OneDrive\图片\Saved Pictures\sialog.png" alt="Logo">
             </a>
             <button class="btn btn-outline-secondary" id="toggleSidebar">=</button>
         </div>
@@ -119,6 +126,7 @@
                 </li>
             </ul>
         </div>
+
         <div class="flex-grow-1" style="margin-left: 250px;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb ms-4">
@@ -126,110 +134,68 @@
                     <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">Library</li>
                 </ol>
             </nav>
-        
 
-            <div class="accordion m-4" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fw-bold text-dark" style="background-color: #ffcb20;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-exclamation-triangle" style="color: white;">&ensp;</i>SISTEM PENGINGAT
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div class="accordion-body text-secondary">
-                            <label>Saat ini tidak ada pengingat yang tersedia.</label>
-                            <br><br>
+            <div class="container m-4">
+                <h2 class="fw-bold">Tabel Penelitian</h2>
+                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addResearchModal">Tambah Penelitian</button>
+
+                <!-- Modal untuk menambah penelitian -->
+                <div class="modal fade" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addResearchModalLabel">Tambah Penelitian</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addResearchForm">
+                                    <div class="mb-3">
+                                        <label for="researchTitle" class="form-label">Judul Penelitian</label>
+                                        <input type="text" class="form-control" id="researchTitle" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="preparationDetails" class="form-label">Keterangan Persiapan</label>
+                                        <textarea class="form-control" id="preparationDetails" rows="3" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Simpan Penelitian</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
-                <div class="container m-4">
-                    <h2 class="fw-bold">Grafik Progres Penelitian</h2>
-                    <canvas id="progressChart" width="400" height="200"></canvas>
-                </div>
-    
-                <!-- Tabel Presentase Keberhasilan Proyek -->
-                <div class="container m-4">
-                    <h2 class="fw-bold">Presentase Keberhasilan Proyek</h2>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nama Peneliti</th>
-                                <th>Presentase Keberhasilan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Peneliti A</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Peneliti B</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Peneliti C</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Peneliti D</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                const ctx = document.getElementById('progressChart').getContext('2d');
-                const progressChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Peneliti A', 'Peneliti B', 'Peneliti C', 'Peneliti D'],
-                        datasets: [{
-                            label: 'Progres Penelitian (%)',
-                            data: [65, 80, 45, 70], // Ganti dengan data progres yang sesuai
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                                'rgba(255, 99, 132, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(255, 99, 132, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            </script>
+                <table class="table table-bordered" id="researchTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul Penelitian</th>
+                            <th>Keterangan Persiapan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Pengaruh Media Sosial terhadap Perilaku Remaja</td>
+                            <td>Menentukan topik penelitian, Melakukan studi literatur, Menyusun proposal penelitian, Mengumpulkan data</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Analisis Kualitas Air Sungai</td>
+                            <td>Menentukan metode penelitian, Menyiapkan alat dan bahan penelitian, Melakukan uji coba awal, Menganalisis data</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Studi Efektivitas Pembelajaran Daring</td>
+                            <td>Menentukan topik penelitian, Melakukan studi literatur, Menyusun proposal penelitian, Menentukan metode penelitian, Mengumpulkan umpan balik</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Pengembangan Aplikasi Mobile untuk Pembelajaran</td>
+                            <td>Menentukan topik penelitian, Menyiapkan alat dan bahan penelitian, Melakukan uji coba awal, Mengumpulkan umpan balik pengguna</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -240,6 +206,31 @@
 
         toggleButton.addEventListener('click', () => {
             sidebar.classList.toggle('d-none');
+        });
+
+        // Menangani penambahan penelitian
+        document.getElementById('addResearchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman form
+
+            const title = document.getElementById('researchTitle').value;
+            const details = document.getElementById('preparationDetails').value;
+
+            // Menambahkan baris baru ke tabel
+            const table = document.getElementById('researchTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            const newCell1 = newRow.insertCell(0);
+            const newCell2 = newRow.insertCell(1);
+            const newCell3 = newRow.insertCell(2);
+
+            newCell1.textContent = table.rows.length; // Nomor urut
+            newCell2.textContent = title; // Judul penelitian
+            newCell3.textContent = details; // Keterangan persiapan
+
+            // Mengosongkan form setelah penambahan
+            document.getElementById('addResearchForm').reset();
+            // Menutup modal setelah penambahan
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addResearchModal'));
+            modal.hide();
         });
 
         function saveStatus(button) {
